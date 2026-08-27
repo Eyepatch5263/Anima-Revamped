@@ -22,7 +22,6 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/anime/:id"} component={AnimeDetailPage} />
-      <Route path={"/collection/:collection"} component={AnimeCollectionPage} />
       <Route path={"/manga/favorites"} component={MangaFavoritesPage} />
       <Route path={"/reader"} component={MangaDexReaderPage} />
       <Route path={"/manga/:id"} component={MangaDetailPage} />

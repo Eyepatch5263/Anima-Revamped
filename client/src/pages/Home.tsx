@@ -362,8 +362,6 @@ export default function Home() {
           <button type="button" onClick={scrollToTrending}>Trending</button>
           <Link href="/manga" onClick={() => setMenuOpen(false)}>Manga</Link>
           <Link href="/reader" onClick={() => setMenuOpen(false)}>Reader</Link>
-          <button type="button" onClick={() => comingSoon("Collections")}>Collections</button>
-          <button type="button" onClick={() => comingSoon("The Journal")}>Journal</button>
         </nav>
 
         <div className="header-actions">
