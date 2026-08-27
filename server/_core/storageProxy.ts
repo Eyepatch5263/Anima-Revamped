@@ -1,7 +1,7 @@
 import path from "node:path";
 import { stat } from "node:fs/promises";
 import type { Express } from "express";
-import { ENV } from "./env";
+import { ENV } from "./env.js";
 
 export function resolveLocalStorageAssetPath(localAssetsDir: string | undefined, key: string): string | null {
   if (!localAssetsDir || !key) return null;
