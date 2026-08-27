@@ -1,10 +1,11 @@
 /** Midnight Editorial reader: printed margins, quiet controls, and full-height pages make a source reader feel like a reading room, not a dashboard. */
 .md-reader-main { padding: clamp(3rem, 7vw, 7rem) clamp(1rem, 6vw, 8rem) 0; }
 .md-reader-header-links { align-items: center; display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); }
-.md-reader-masthead { align-items: end; border-bottom: 1px solid var(--rule); display: grid; gap: clamp(1.6rem, 5vw, 5rem); grid-template-columns: clamp(90px, 12vw, 180px) minmax(0, 1fr) minmax(175px, 0.36fr); padding-bottom: clamp(3rem, 6vw, 5rem); }
+.md-reader-masthead { align-items: end; border-bottom: 1px solid var(--rule); display: grid; gap: clamp(1.6rem, 5vw, 5rem); grid-template-columns: clamp(90px, 12vw, 180px) minmax(0, 1fr); padding-bottom: clamp(3rem, 6vw, 5rem); }
 .md-reader-masthead aside { align-self: stretch; border-top: 1px solid var(--rule); padding-top: 0.8rem; }
 .md-reader-masthead aside span { color: var(--signal); font-family: "DM Serif Display", Georgia, serif; font-size: 2.6rem; letter-spacing: -0.08em; }
 .md-reader-masthead aside p { color: #b7afa4; font-size: 0.61rem; font-weight: 800; letter-spacing: 0.15em; line-height: 1.5; margin-top: 0.85rem; }
+.md-reader-masthead > div:nth-child(2) { justify-self: end; width: 100%; max-width: 620px; }
 .md-reader-masthead h1, .md-search-desk h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(3.2rem, 7vw, 7rem); font-weight: 400; letter-spacing: -0.065em; line-height: 0.87; margin: 0.8rem 0 1.25rem; }
 .md-reader-masthead h1 em, .md-search-desk h2 em { color: #e9dfd4; font-style: italic; }
 .md-reader-masthead > div:nth-child(2) > p:not(.section-heading__eyebrow) { color: #bfb7ac; font-size: 0.88rem; line-height: 1.7; max-width: 485px; }

@@ -149,8 +149,7 @@ export default function MangaDexReaderPage() {
       <main className="md-reader-main">
         <section className="md-reader-masthead">
           <aside><span>10</span><p>THE<br />READER</p></aside>
-          <div><p className="section-heading__eyebrow"><span className="live-dot" /> Source: MangaDex</p><h1>Open the<br /><em>next page.</em></h1><p>Search the MangaDex catalog, choose an available English chapter, and read it here in a source-labelled reading room.</p></div>
-          <div className="md-reader-masthead__notes"><span>LIVE SOURCE</span><p>Chapter images are requested only as you read. Data Saver is selected by default.</p></div>
+          <div><p className="section-heading__eyebrow"> Source: MangaDex</p><h1>Open the<br /><em>next page.</em></h1><p>Search the MangaDex catalog, choose an available English chapter, and read it here in a source-labelled reading room.</p></div>
         </section>
         <section className="md-search-desk" aria-labelledby="md-search-title">
           <div><p className="section-heading__eyebrow"><Search size={14} /> The source desk</p><h2 id="md-search-title">Find a<br /><em>title.</em></h2></div>
