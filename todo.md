@@ -1,0 +1,111 @@
+- [x] Define the AniList media-detail GraphQL shape for synopsis, characters, studios, and trailer data.
+- [x] Add a dedicated `/anime/:id` route and connect existing anime cards to it.
+- [x] Build the responsive detail page with a cinematic hero, full description, character list, studio credits, and trailer link.
+- [x] Verify live data loading and the desktop detail experience with a current AniList title, including synopsis, cast, studio, and embedded YouTube trailer.
+- [x] Verify the responsive loading state, type checks, and a successful production build for the detail route.
+- [x] Sync the preview with the latest shared-project version.
+- [x] Define a compact browser-storage schema for saved anime.
+- [x] Add a watchlist control to anime detail pages and persist selections locally.
+- [x] Build a dedicated saved-anime page with navigation, removal controls, and an empty state.
+- [x] Validate adding, retaining, and viewing a saved anime in the live browser session.
+- [x] Validate removing a saved anime and the resulting empty state in the live browser session.
+- [x] Re-add a title and confirm the compact saved entry remains in browser local storage.
+- [x] Verify watchlist persistence, saved-anime page behavior, and the home navigation count.
+- [x] Extend saved-anime data with a watch status and an episode-progress value.
+- [x] Add status selection and episode-progress controls to each watchlist card.
+- [x] Verify saved status, incremented progress, persistence, and completed-status boundary behavior in the live browser session.
+- [x] Verify status and progress persistence, boundaries, and watchlist presentation.
+- [x] Define filter categories and default sort order for saved anime.
+- [x] Add status filters and sorting controls to the watchlist shelf.
+- [x] Validate status filter counts, no-result guidance, reset behavior, and alternate sorting in the live browser session.
+- [x] Verify filtered counts, sorting results, and no-result states.
+- [x] Record recent watch activity when status or episode progress changes.
+- [x] Add a pinned homepage Continue Watching section for active titles.
+- [x] Verify a fresh episode update raises a Watching title into the homepage rail with its current progress display.
+- [x] Verify the pinned Continue Watching card’s corresponding detail route resolves successfully.
+- [x] Verify recent-activity ordering, progress display, and detail-page navigation.
+- [x] Persist the date on which a saved anime becomes Completed.
+- [x] Add a pinned homepage Recently Completed section for the past seven days.
+- [x] Verify a newly completed title enters the weekly homepage rail with a current-week label and completed progress.
+- [x] Verify weekly eligibility, completed-progress presentation, and the existing detail-route destination.
+- [x] Define the four AniList collection modes and matching all-results routes.
+- [x] Fetch six-title homepage previews for seasonal popular, next-season upcoming, all-time popular, and top 100.
+- [x] Build all-results collection pages that fetch the remaining matching titles on demand.
+- [x] Verify all four homepage collection previews return six live AniList titles after the combined query resolves.
+- [x] Verify View all navigation, paginated all-results loading, and responsive presentation for each collection type.
+- [x] Resolve the all-results collection query so archive pages load the requested extended title set.
+- [x] Confirm the repaired all-results archive fetch completes with more than the six homepage preview titles.
+- [x] Fix and verify Open more appends a further page of matching collection results; the all-time popular archive now expands from 48 to 96 titles.
+- [x] Confirm the AniList second-page response contains 48 matching all-time popular titles.
+- [x] Confirm the Top 100 and seasonal all-results routes each load their extended 48-title AniList archives.
+- [x] Confirm the upcoming next-season route loads its extended not-yet-released AniList archive.
+- [x] Verify View all navigation, paginated all-results loading, and responsive presentation for each collection type.
+- [x] Define an accessible automatic-loading trigger while preserving manual archive pagination.
+- [x] Add infinite loading and incremental loading feedback to all collection archive pages.
+- [x] Confirm the active automatic-loading state appends the next archive page without duplicates; the popular archive extended from 48 to 96 titles.
+- [x] Verify the manual continuation fallback; it continues from the automatically loaded archive and extends the collection from 96 to 144 unique titles.
+- [x] Verify the end-of-archive message is rendered when AniList reports no remaining collection pages.
+- [x] Extend the AniList detail query with recommendations and direct relation fields.
+- [x] Add related-story and recommended-anime sections to the detail-page editorial layout.
+- [x] Verify live relationship and recommendation rails render from AniList, including sequel and companion entries.
+- [x] Verify a related-story sequel and a suggested anime each resolve to the matching live detail page with their own AniList metadata, related entries, and recommendations.
+- [x] Define scoped archive filters for title search, genre, year, airing status, season, and format.
+- [x] Apply active filter values to each collection’s AniList query and pagination flow.
+- [x] Build responsive collection filter controls with reset and active-filter feedback.
+- [x] Verify scoped searches, filter combinations, resets, and filtered infinite continuation.
+- [x] Sync the preview with the newest shared-project version.
+- [x] Confirm the all-time popularity AniList query returns live data directly from the browser.
+- [x] Verify filtered counts, sorting results, and no-result states.
+- [x] Inspect the existing manga GraphQL query and route patterns in the shared project.
+- [x] Build a dedicated live manga archive with scoped search and AniList filters.
+- [x] Add a clear Manga entry point within the existing Midnight Editorial navigation.
+- [x] Verify live manga filtering, no-results recovery, responsive behavior, and production build.
+- [x] Review Manga archive request states for initial loads, filtered searches, and pagination.
+- [x] Implement elevated Manga loading skeletons and a reading-room progress indicator.
+- [x] Verify loading feedback and validate the final build.
+- [x] Inspect the existing anime detail data shape and page system for reusable Manga patterns.
+- [x] Add a live AniList Manga detail query with characters, staff, and related media.
+- [x] Build the dedicated Manga story-file route and link Manga archive cards to it.
+- [x] Verify live Manga details, related media links, responsive layouts, and production build.
+- [x] Inspect the existing browser-local anime watchlist for reusable persistence patterns.
+- [x] Add persisted Manga favorite controls to dedicated Manga story files.
+- [x] Build a dedicated personal Manga bookshelf with saved-title removal.
+- [x] Verify save, reload persistence, removal, navigation, responsive layout, and production build.
+- [x] Define a unified local library record from saved anime and favorite Manga data.
+- [x] Build a combined personal library page with type and viewing-status filters.
+- [x] Add clear library navigation from existing saved-content pages.
+- [x] Verify mixed entries, filters, removals, responsive layouts, and production build.
+- [x] Inspect the uploaded manga-source index and identify documented authorized source options.
+- [x] Compare a user-content reader with approved third-party source integrations and confirm the intended approach.
+- [x] Implement the approved MangaDex reading experience using documented source endpoints and without bypassing publisher controls.
+- [x] Validate source access, page rendering, responsive behavior, and the production build.
+- [x] Verify MangaDex API documentation, CORS behavior, and permitted client-side request flows.
+- [x] Create normalized MangaDex search, title, chapter, and page-manifest models.
+- [x] Build search results, chapter selection, and an in-app MangaDex page reader.
+- [x] Validate Solo Leveling search and its explicit no-English-chapters reader state on desktop and mobile.
+- [x] Validate a separate safe MangaDex title with available English chapters through its full page-rendering flow.
+- [x] Review the current MangaDex chapter model and define detailed-list metadata and filtering behavior.
+- [x] Build a complete selected-title chapter ledger with searchable, browsable chapter rows and reader actions.
+- [x] Verify chapter filtering, selection, pagination coverage, responsive layout, and production build.
+- [x] Define a versioned browser-local reading-progress record keyed by MangaDex title ID.
+- [x] Persist a selected chapter per title and restore it when its live chapter ledger loads.
+- [x] Show a restrained saved-reading indicator and verify persistence, stale-record fallback, responsive behavior, and production checks.
+- [x] Verify a stale saved chapter record safely falls back to the first available live chapter.
+- [x] Verify the saved-reading indicator and chapter summary remain responsive at mobile width.
+- [x] Directly verify a saved/resumed chapter summary at 375px width without overflow.
+- [x] Capture and inspect the mobile reader after a saved chapter is reopened.
+- [x] Support an optional MangaDex title ID in the reader URL for stable title-specific reader entry.
+- [x] Preserve an inspectable 375px capture of the visible saved/resumed chapter summary without overflow.
+- [x] Record the reopened saved-chapter mobile state in the reader validation notes.
+- [x] Retain the inspectable 375px reopened saved-chapter summary outside the deployable project for release verification.
+- [x] Extend browser-local MangaDex reading records with shelf-ready title and chapter metadata.
+- [x] Build a homepage Continue reading shelf ordered by most recent manga reading activity with direct reader links.
+- [x] Verify recent-reading ordering, empty state, resume destinations, responsive layout, and production checks.
+- [x] Verify that a homepage with no saved manga reading history omits the Continue reading shelf.
+- [x] Retain inspectable evidence of the populated Continue reading shelf at a 375px mobile width.
+- [x] Preserve a native 375px Continue reading shelf capture outside the deployable project for the release record.
+- [ ] Inspect the current package scripts, environment requirements, and project asset references for local development.
+- [ ] Validate a clean dependency install, development-server startup, and production build using documented local commands.
+- [ ] Package the source repository, available local assets, and concise local-run guidance for download.
+- [ ] Add an optional local managed-asset directory fallback so `/manus-storage` paths work without Manus storage credentials.
+- [ ] Keep optional analytics and OAuth integrations from emitting avoidable configuration warnings during local public browsing.

@@ -1,0 +1,30 @@
+# MangaDex Reader Integration Notes
+
+- MangaDex requires third-party clients to proxy API and image requests because it does not return CORS responses for other sites and returns a wrong response for hotlinked images.
+- The reader uses the documented title feed endpoint for English, safe/suggestive chapters and requests a per-chapter MangaDex@Home manifest only when a chapter is selected.
+- MangaDex image manifests expire, so the server keeps only an in-memory, 14-minute manifest cache and never stores chapter image files.
+- Live validation on 2026-08-27: the source search returned Solo Leveling records, while the source’s current English chapter feed was empty for the selected Solo Leveling records. A safe, available English test title returned five chapters; its first chapter returned a 21-page manifest; `/api/mangadex/page/.../0?quality=data-saver` returned `200 image/jpeg` with 141,160 bytes.
+- The detailed chapter ledger now reads the complete paginated English feed for a selected title, exposing source order, chapter and volume labels, localized chapter titles, page totals, dates, and a direct reader action for each returned chapter.
+- Live ledger validation used a safe MangaDex title with five available English chapters. The reader displayed every returned record with its source index, chapter label, title, page total, and publication date before the selected chapter’s 21 source pages.
+- The ledger’s title filter was verified against the live chapter list: a "Fantasy Time" query narrowed the rendered chapter rows from five records to the uniquely matching fourth chapter without changing the selected MangaDex title.
+- Selecting that filtered fourth-chapter row updated the active chapter controls and returned its separate four-page MangaDex manifest, confirming that detailed-list actions and reader rendering remain connected.
+- Last-read chapter selection is now stored browser-locally under a versioned Anima key, indexed by MangaDex title ID. When a title’s live ledger loads, the reader restores the saved chapter only if it remains available; otherwise it safely opens the first current chapter.
+- Live progress validation selected the fourth available chapter of a safe MangaDex title and confirmed that its chapter ID replaced the title-scoped saved record in browser storage.
+- The local record contains only a MangaDex title ID, chapter ID, and local save timestamp; no source page data or image bytes are retained in browser storage.
+- After reloading the reader and opening the same live title again, the page automatically restored the saved fourth chapter and showed the restrained "Resumed locally" state beside its source metadata.
+- A syntactically valid but unavailable saved chapter ID was also tested. The reader safely selected the first current chapter, replaced the stale local value, and showed the ordinary saved state rather than a false resume indicator.
+- The 375px mobile capture preserved the reader masthead, source desk, search control, and result rail without horizontal overflow before the title file and saved-progress summary.
+- In the 375px title-file panel, the chapter summary and compact "Saved locally" marker remained fully visible below the image-quality controls, with no clipping or horizontal layout break.
+- The succeeding mobile ledger panels retained readable chapter facts and direct reading actions before the selected chapter’s source pages, without disrupting the saved-progress layout above.
+- The mobile reading-page panels stayed within the 375px viewport after the title-file and chapter-ledger sections, preserving the source page flow without horizontal overflow.
+- A separate 375px retained-browser-profile capture was prepared as an independent reload check of the saved local chapter state.
+- That independent 375px reload showed the saved first chapter together with the fully visible "Resumed locally" marker beneath the chapter summary, confirming that the compact resume state remains responsive.
+- A native 375px crop of the retained-profile reopen confirmed that the chapter summary, image-quality controls, "Resumed locally" marker, and chapter-ledger heading are all fully visible without horizontal overflow.
+- Retained validation evidence: `/home/ubuntu/reader-progress-evidence.png` is a native 375 × 600 capture of the reopened reader’s visible chapter summary and resume marker.
+- The resumed mobile capture preserved the searchable chapter ledger and transition to the active source pages after the title summary, without clipping its reader controls.
+- The resumed reader’s following mobile source-page panels also remained contained at 375px width, completing the responsive review through the active reading flow.
+- The 375px homepage capture preserved the compact mobile masthead and editorial hero ahead of the locally derived Continue reading shelf, without an overflow or overlap into the shelf transition.
+- The populated Continue reading shelf remained contained at 375px: its local reading desk, archival folio card, title, recency label, and direct reading-room action were visible, while the long chapter label correctly truncated rather than overflowing.
+- With the saved browser record temporarily removed, the homepage omitted the Continue reading shelf entirely; restoring the valid local record and its change event returned the title card immediately. Its direct URL reopened the matching reader title and restored the saved chapter.
+- Retained mobile homepage evidence begins at `/home/ubuntu/continue-reading-evidence/home-full.png`; its first panels confirm the compact 375px hero and the uninterrupted transition into the locally derived Continue reading shelf.
+- Official references: https://api.mangadex.org/docs/2-limitations/ and https://api.mangadex.org/docs/04-chapter/retrieving-chapter/.

@@ -1,0 +1,33 @@
+/** Midnight Editorial: the filter desk is an archival research surface—bone notes, vermilion cuts, and no dashboard gloss. */
+.archive-filter-desk { border-bottom: 1px solid var(--rule); display: grid; gap: clamp(2rem, 5vw, 6rem); grid-template-columns: minmax(210px, 0.55fr) minmax(0, 1.2fr); margin: 0 clamp(1rem, 6vw, 8rem); padding: clamp(3rem, 6vw, 5.5rem) 0; }
+.archive-filter-desk__heading h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.7rem, 5vw, 5rem); font-weight: 400; letter-spacing: -0.06em; line-height: 0.9; margin: 0.85rem 0 1.1rem; }
+.archive-filter-desk__heading h2 em { color: #e9dfd4; font-style: italic; }
+.archive-filter-desk__heading > p:not(.section-heading__eyebrow) { color: var(--ash); font-size: 0.82rem; line-height: 1.65; max-width: 245px; }
+.archive-filter-form { border-top: 1px solid var(--rule); display: grid; gap: 1.3rem; padding-top: 1rem; }
+.archive-filter-form__scope { color: #92897e; font-size: 0.66rem; line-height: 1.55; margin: 0; max-width: 520px; }
+.archive-filter-field { display: block; min-width: 0; }
+.archive-filter-field > span:first-child { color: #a99f92; display: block; font-size: 0.57rem; font-weight: 800; letter-spacing: 0.12em; margin-bottom: 0.4rem; text-transform: uppercase; }
+.archive-search { align-items: center; border-bottom: 1px solid #71695f; display: flex; gap: 0.6rem; padding: 0.55rem 0; }
+.archive-search svg { color: var(--signal); flex: 0 0 auto; }
+.archive-search input { background: transparent; border: 0; color: var(--paper); font-family: "Manrope", sans-serif; font-size: 0.9rem; outline: none; width: 100%; }
+.archive-search input::placeholder { color: #766e64; }
+.archive-search:focus-within { border-color: var(--signal); }
+.archive-filter-form__selects { display: grid; gap: 0.75rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.archive-filter-form select { appearance: none; background: #211f1b; border: 1px solid rgb(241 238 231 / 23%); color: #e7ded3; font-family: "Manrope", sans-serif; font-size: 0.69rem; font-weight: 800; letter-spacing: 0.03em; outline: none; padding: 0.58rem 1.7rem 0.58rem 0.65rem; width: 100%; }
+.archive-filter-form select:focus-visible { border-color: var(--signal); }
+.archive-filter-form select option { background: #211f1b; color: #f1e9de; }
+.archive-filter-form__actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem; padding-top: 0.15rem; }
+.archive-filter-reset { align-items: center; background: transparent; border: 0; color: #aaa196; display: inline-flex; font-family: "Manrope", sans-serif; font-size: 0.61rem; font-weight: 800; gap: 0.3rem; letter-spacing: 0.09em; padding: 0; text-transform: uppercase; }
+.archive-filter-reset:hover, .archive-filter-reset:focus-visible { color: var(--signal); }
+.archive-results-caption { align-items: center; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; margin: 0 clamp(1rem, 6vw, 8rem); padding: 1rem 0; }
+.archive-results-caption span { color: var(--signal); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; }
+.archive-results-caption p { color: #aaa196; font-size: 0.69rem; }
+.archive-empty-results { border-bottom: 1px solid var(--rule); margin: 0 auto; max-width: 550px; padding: clamp(4rem, 8vw, 7rem) 0; text-align: center; }
+.archive-empty-results > svg { color: var(--signal); }
+.archive-empty-results .section-heading__eyebrow { justify-content: center; margin-top: 0.95rem; }
+.archive-empty-results h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.8rem, 5vw, 4.6rem); font-weight: 400; letter-spacing: -0.06em; line-height: 0.91; margin: 0.9rem 0; }
+.archive-empty-results h2 em { color: #e9dfd4; font-style: italic; }
+.archive-empty-results > p:not(.section-heading__eyebrow) { color: var(--ash); font-size: 0.84rem; line-height: 1.65; margin: 0 auto; max-width: 360px; }
+.archive-empty-results .text-button { margin-top: 1.5rem; }
+@media (max-width: 900px) { .archive-filter-desk { grid-template-columns: 0.55fr 1fr; } .archive-filter-form__selects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .archive-filter-desk { display: block; margin: 0 1.2rem; padding: 4rem 0; } .archive-filter-desk__heading > p:not(.section-heading__eyebrow) { margin-bottom: 2.4rem; } .archive-filter-form__selects { gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); } .archive-filter-form__actions .button { width: 100%; } .archive-results-caption { align-items: start; flex-direction: column; gap: 0.25rem; margin: 0 1.2rem; } }
