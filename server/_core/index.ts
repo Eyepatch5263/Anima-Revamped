@@ -6,7 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth.js";
 import { registerStorageProxy } from "./storageProxy.js";
 import { appRouter } from "../routers.js";
-import { proxyMangaDexPage } from "../mangadex.js";
+import { proxyMangaDexPage, proxyMangaDexCover } from "../mangadex.js";
 import { createContext } from "./context.js";
 import { serveStatic, setupVite } from "./vite.js";
 
@@ -38,6 +38,7 @@ async function startServer() {
   registerStorageProxy(app);
   registerOAuthRoutes(app);
   app.get("/api/mangadex/page/:chapterId/:pageIndex", proxyMangaDexPage);
+  app.get("/api/mangadex/cover/:mangaId/:filename", proxyMangaDexCover);
   // tRPC API
   app.use(
     "/api/trpc",

@@ -162,3 +162,38 @@ export async function proxyMangaDexPage(request: Request, response: Response) {
     response.status(502).json({ error: error instanceof Error ? error.message : "MangaDex reader is unavailable." });
   }
 }
+
+export async function proxyMangaDexCover(request: Request, response: Response) {
+  const { mangaId, filename } = request.params;
+  if (!mangaId || !filename) {
+    response.status(400).json({ error: "Invalid cover request." });
+    return;
+  }
+  try {
+    const coverUrl = `https://uploads.mangadex.org/covers/${mangaId}/${encodeURIComponent(filename)}.256.jpg`;
+    const upstream = await fetch(coverUrl, {
+      headers: MANGADEX_HEADERS,
+      signal: AbortSignal.timeout(10_000),
+    });
+    if (!upstream.ok || !upstream.body) {
+      const fallbackUrl = `https://uploads.mangadex.org/covers/${mangaId}/${encodeURIComponent(filename)}`;
+      const fallbackRes = await fetch(fallbackUrl, {
+        headers: MANGADEX_HEADERS,
+        signal: AbortSignal.timeout(10_000),
+      });
+      if (!fallbackRes.ok || !fallbackRes.body) {
+        response.status(fallbackRes.status || 502).json({ error: "Cover not found." });
+        return;
+      }
+      response.setHeader("Content-Type", fallbackRes.headers.get("content-type") || "image/jpeg");
+      response.setHeader("Cache-Control", "public, max-age=86400");
+      response.status(200).send(Buffer.from(await fallbackRes.arrayBuffer()));
+      return;
+    }
+    response.setHeader("Content-Type", upstream.headers.get("content-type") || "image/jpeg");
+    response.setHeader("Cache-Control", "public, max-age=86400");
+    response.status(200).send(Buffer.from(await upstream.arrayBuffer()));
+  } catch (error) {
+    response.status(502).json({ error: "Failed to fetch MangaDex cover." });
+  }
+}

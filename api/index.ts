@@ -3,7 +3,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "../server/_core/oauth.js";
 import { registerStorageProxy } from "../server/_core/storageProxy.js";
 import { appRouter } from "../server/routers.js";
-import { proxyMangaDexPage } from "../server/mangadex.js";
+import { proxyMangaDexPage, proxyMangaDexCover } from "../server/mangadex.js";
 import { createContext } from "../server/_core/context.js";
 
 const app = express();
@@ -15,6 +15,7 @@ registerStorageProxy(app);
 registerOAuthRoutes(app);
 
 app.get(["/api/mangadex/page/:chapterId/:pageIndex", "/mangadex/page/:chapterId/:pageIndex"], proxyMangaDexPage);
+app.get(["/api/mangadex/cover/:mangaId/:filename", "/mangadex/cover/:mangaId/:filename"], proxyMangaDexCover);
 
 const trpcHandler = createExpressMiddleware({
   router: appRouter,
