@@ -383,20 +383,10 @@ export default function Home() {
             <div className="hero-section__veil" />
           </div>
           <div className="hero-section__content">
-            <div className="hero-kicker"><span className="live-dot" /> Live cultural index <span>·</span> powered by AniList</div>
+            <div className="hero-kicker"> Live cultural index <span>·</span> powered by AniList</div>
             <h1 id="hero-title">Follow the feeling.<br /><em>Find the story.</em></h1>
             <p className="hero-summary">A more considered way to discover anime: live signals, meaningful details, and artwork allowed to speak for itself.</p>
-            <label className="search-field" htmlFor="anime-search">
-              <Search size={18} aria-hidden="true" />
-              <input
-                id="anime-search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search a story or mood"
-                autoComplete="off"
-              />
-              {search && <button type="button" onClick={() => setSearch("")} aria-label="Clear search"><X size={15} /></button>}
-            </label>
+            
             <div className="hero-cta-row">
               <button type="button" className="button button--signal" onClick={scrollToTrending}>Read the signal <ArrowDownRight size={18} /></button>
               <button type="button" className="button button--quiet" onClick={() => comingSoon("Mood finder")}>Find by mood <Compass size={17} /></button>
