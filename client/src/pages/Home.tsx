@@ -19,7 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { COLLECTIONS, type CollectionKey, type CollectionPreviewState, useHomepageCollections } from "@/hooks/useAnimeCollections";
 import { type Anime, useTrendingAnime } from "@/hooks/useTrendingAnime";
 import { useMangaFavorites } from "@/hooks/useMangaFavorites";
@@ -31,6 +31,7 @@ const HERO_ART = "/anima-midnight-hero_8078e0a3.jpg";
 const PAPER_TEXTURE = "/anima-paper-texture_044607fc.jpg";
 const BRAND_MARK = "/anima-brand-mark_e15d6eac.png";
 const READING_ROOM = "/anima-reading-room_790c079a.jpg";
+const ARCHIVE_BANNER = "/anima-archive-banner.png";
 
 function titleOf(anime: Anime) {
   return anime.title.userPreferred || anime.title.english || anime.title.romaji || "Untitled story";
@@ -167,7 +168,155 @@ function CollectionPreviewCard({ anime, index }: { anime: Anime; index: number }
 function DiscoveryRail({ collection, number, state }: { collection: CollectionKey; number: string; state: CollectionPreviewState }) {
   const { anime, isLoading, error, retry } = state;
   const definition = COLLECTIONS[collection];
-  return <section className={`discovery-rail discovery-rail--${collection}`} aria-labelledby={`${collection}-title`}><div className="discovery-rail__index"><span>{number}</span><p>{definition.railLabel.split(" ").slice(0, 2).join("\n")}</p></div><div className="discovery-rail__body"><div className="discovery-rail__heading"><div><p className="section-heading__eyebrow">{definition.eyebrow}</p><h2 id={`${collection}-title`}>{definition.title}</h2></div><Link href={`/collection/${collection}`} className="text-button">View all <ArrowUpRight size={17} /></Link></div>{error ? <div className="collection-preview-error"><CircleAlert size={18} /><p>{error}</p><button type="button" onClick={retry}>Retry</button></div> : <div className="discovery-rail__cards">{isLoading ? Array.from({ length: 6 }, (_, index) => <div key={index} className="discovery-card discovery-card--skeleton"><div /><i /><span /></div>) : anime.map((item, index) => <CollectionPreviewCard key={item.id} anime={item} index={index + 1} />)}</div>}</div></section>;
+  return (
+    <section id={collection} className={`discovery-rail discovery-rail--${collection}`} aria-labelledby={`${collection}-title`}>
+      <div className="discovery-rail__index">
+        <span>{number}</span>
+        <p>{definition.railLabel.split(" ").slice(0, 2).join("\n")}</p>
+      </div>
+      <div className="discovery-rail__body">
+        <div className="discovery-rail__heading">
+          <div>
+            <p className="section-heading__eyebrow">{definition.eyebrow}</p>
+            <h2 id={`${collection}-title`}>{definition.title}</h2>
+          </div>
+          <Link href={`/collection/${collection}`} className="text-button">View all <ArrowUpRight size={17} /></Link>
+        </div>
+        {error ? (
+          <div className="collection-preview-error">
+            <CircleAlert size={18} />
+            <p>{error}</p>
+            <button type="button" onClick={retry}>Retry</button>
+          </div>
+        ) : (
+          <div className="discovery-rail__cards">
+            {isLoading
+              ? Array.from({ length: 6 }, (_, index) => <div key={index} className="discovery-card discovery-card--skeleton"><div /><i /><span /></div>)
+              : anime.map((item, index) => <CollectionPreviewCard key={item.id} anime={item} index={index + 1} />)}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+const PRESET_QUERIES = [
+  { label: "Rainy Cyberpunk Mystery", keywords: ["Cyberpunk", "Psychological", "Action", "Sci-Fi"] },
+  { label: "Cozy Kyoto Slice of Life", keywords: ["Slice of Life", "Comedy", "Romance"] },
+  { label: "Psychological Mind Games", keywords: ["Psychological", "Thriller", "Mystery"] },
+  { label: "Dark Fantasy & Revenge", keywords: ["Fantasy", "Action", "Drama"] },
+  { label: "Melancholic Space Odyssey", keywords: ["Sci-Fi", "Drama", "Adventure"] },
+];
+
+function SemanticRecommendationEngine({ allAnime }: { allAnime: Anime[] }) {
+  const [, setLocation] = useLocation();
+  const [promptText, setPromptText] = useState("Rainy Cyberpunk Mystery");
+  const [activePreset, setActivePreset] = useState<string | null>("Rainy Cyberpunk Mystery");
+  const [activeKeywords, setActiveKeywords] = useState<string[]>(["Cyberpunk", "Psychological", "Action"]);
+
+  const handleApplyPreset = (preset: typeof PRESET_QUERIES[number]) => {
+    setActivePreset(preset.label);
+    setPromptText(preset.label);
+    setActiveKeywords(preset.keywords);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLocation("/recommendations");
+  };
+
+  const matchedAnime = useMemo(() => {
+    if (!allAnime || !allAnime.length) return [];
+    return allAnime.filter(item => {
+      const text = `${item.title?.userPreferred || ""} ${item.title?.english || ""} ${item.genres?.join(" ") || ""} ${item.description || ""}`.toLowerCase();
+      return activeKeywords.some(kw => text.includes(kw.toLowerCase()));
+    }).slice(0, 3);
+  }, [allAnime, activeKeywords]);
+
+  return (
+    <section id="semantic-engine" className="feature-section" aria-label="AI Semantic Recommendation Engine">
+      <div className="feature-art">
+        <img src={READING_ROOM} alt="Illustrated AI neural reading room" />
+        <span className="feature-art__mark"><Sparkles size={32} /></span>
+        <div className="feature-art__badge">
+          <span>08</span>
+          <b>AI VECTOR ENGINE</b>
+        </div>
+      </div>
+      
+      <div className="feature-copy feature-copy--semantic">
+        <p className="section-heading__eyebrow">Vector Neural Engine</p>
+        <h2>Describe a vibe.<br /><em>Let vector AI find it.</em></h2>
+        <p>Type any mood, aesthetic, narrative theme, or atmospheric prompt. Our semantic vector engine parses your natural language query to surface matching stories.</p>
+        
+        <form onSubmit={handleSubmit} className="semantic-prompt-box">
+          <div className="semantic-prompt-input-wrapper">
+            <Sparkles size={16} className="semantic-prompt-icon" />
+            <input
+              type="text"
+              value={promptText}
+              onChange={(e) => setPromptText(e.target.value)}
+              placeholder="e.g. Rainy cyberpunk mystery with philosophical themes..."
+              className="semantic-prompt-input"
+            />
+            <button type="submit" className="button button--signal semantic-prompt-btn">
+              Launch Feature <ArrowUpRight size={15} />
+            </button>
+          </div>
+        </form>
+
+        <div className="semantic-presets">
+          <span>Try a vector query prompt:</span>
+          <div className="semantic-presets__pills">
+            {PRESET_QUERIES.map((preset) => (
+              <button
+                key={preset.label}
+                type="button"
+                className={`semantic-preset-pill ${activePreset === preset.label ? "is-active" : ""}`}
+                onClick={() => handleApplyPreset(preset)}
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {matchedAnime.length > 0 && (
+          <div className="semantic-results">
+            <div className="semantic-results__header">
+              <Sparkles size={14} />
+              <span>Vector Matches for <b>“{activePreset || promptText}”</b></span>
+            </div>
+            <div className="semantic-results__grid">
+              {matchedAnime.map((item, idx) => (
+                <Link key={item.id} href={`/anime/${item.id}`} className="semantic-result-card">
+                  <div className="semantic-result-card__art">
+                    {item.coverImage?.large ? <img src={item.coverImage.large} alt="" /> : <div className="semantic-result-card__fallback" />}
+                    <span className="semantic-match-score">{99 - idx * 3}% match</span>
+                  </div>
+                  <div className="semantic-result-card__info">
+                    <h4>{item.title?.userPreferred || item.title?.english || "Anime story"}</h4>
+                    <p>{item.genres?.slice(0, 2).join(" · ") || "Vector match"}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <aside className="genre-index semantic-vibe-index" aria-label="Semantic Clusters">
+        <p>Semantic Clusters</p>
+        <div>
+          {PRESET_QUERIES.map((preset, index) => (
+            <button key={preset.label} type="button" onClick={() => handleApplyPreset(preset)}>
+              <span>{String(index + 1).padStart(2, "0")}</span>{preset.label}
+            </button>
+          ))}
+        </div>
+      </aside>
+    </section>
+  );
 }
 
 export default function Home() {
@@ -344,24 +493,33 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="discovery-collections" aria-label="More ways to enter the Anima archive"><div className="discovery-collections__masthead"><p className="section-heading__eyebrow">Four more ways in</p><h2>Follow a different<br /><em>kind of signal.</em></h2><p>Six titles to begin with. Each archive opens into the complete living index when you are ready for more.</p></div><DiscoveryRail collection="seasonal" number="04" state={homepageCollections.seasonal} /><DiscoveryRail collection="upcoming" number="05" state={homepageCollections.upcoming} /><DiscoveryRail collection="popular" number="06" state={homepageCollections.popular} /><DiscoveryRail collection="top" number="07" state={homepageCollections.top} /></section>
-
-        <section className="feature-section" aria-label="Curated discovery details">
-          <div className="feature-art">
-            <img src={READING_ROOM} alt="A moody illustrated cinema reading room" />
-            <span className="feature-art__mark">A</span>
+        <section className="discovery-collections" aria-label="More ways to enter the Anima archive">
+          <div className="discovery-collections__masthead">
+            <div className="masthead-art">
+              <img src={ARCHIVE_BANNER} alt="Floating manga pages and anime landscape under starry sky" />
+              <div className="masthead-art__veil" />
+              <div className="masthead-art__badge">
+                <span>04—07</span>
+                <b>FOUR ARCHIVES</b>
+              </div>
+            </div>
+            <div className="masthead-copy">
+              <p className="section-heading__eyebrow">Four more ways in</p>
+              <h2>Follow a different<br /><em>kind of signal.</em></h2>
+              <p>Four curated titles to begin with. Each archive opens into the complete living index when you are ready for deeper discovery.</p>
+              <div className="masthead-quick-links">
+                <a href="#seasonal"><span>04</span> Seasonal</a>
+                <a href="#upcoming"><span>05</span> Upcoming</a>
+                <a href="#popular"><span>06</span> Popular</a>
+                <a href="#top"><span>07</span> Top rated</a>
+              </div>
+            </div>
           </div>
-          <div className="feature-copy">
-            <p className="section-heading__eyebrow">A more human index</p>
-            <h2>Not a queue.<br /><em>A point of view.</em></h2>
-            <p>Every title comes with a concise signal: where it sits in the moment, what it carries, and why the artwork deserves your attention before another autoplay timer starts.</p>
-            <button type="button" className="text-button" onClick={() => comingSoon("Anima’s editorial method")}>Read the method <ArrowUpRight size={17} /></button>
-          </div>
-          <aside className="genre-index" aria-label="Genres currently in the live index">
-            <p>Current threads</p>
-            <div>{genres.length ? genres.map((genre, index) => <button key={genre} type="button" onClick={() => setSearch(genre)}><span>{String(index + 1).padStart(2, "0")}</span>{genre}</button>) : <LoaderCircle className="genre-index__loader" />}</div>
-          </aside>
-        </section>
+          <DiscoveryRail collection="seasonal" number="04" state={homepageCollections.seasonal} />
+          <DiscoveryRail collection="upcoming" number="05" state={homepageCollections.upcoming} />
+          <DiscoveryRail collection="popular" number="06" state={homepageCollections.popular} />
+          <DiscoveryRail collection="top" number="07" state={homepageCollections.top} />
+        </section>        <SemanticRecommendationEngine allAnime={anime} />
       </main>
 
       <footer className="site-footer">

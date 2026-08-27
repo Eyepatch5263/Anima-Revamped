@@ -269,16 +269,48 @@
   .data-message .button { margin-left: auto; }
   .data-message--empty { max-width: 38rem; }
 
-  .feature-section { border-top: 1px solid var(--rule); display: grid; grid-template-columns: minmax(250px, 1.15fr) minmax(250px, 0.8fr) minmax(180px, 0.48fr); margin: clamp(2rem, 6vw, 6rem) clamp(1rem, 6vw, 8rem) 0; }
+  .feature-section { border-top: 1px solid var(--rule); display: grid; grid-template-columns: minmax(250px, 0.95fr) minmax(320px, 1.25fr) minmax(200px, 0.55fr); margin: clamp(2rem, 6vw, 6rem) clamp(1rem, 6vw, 8rem) 0; }
   .feature-art { min-height: 530px; overflow: hidden; position: relative; }
   .feature-art::after { background: linear-gradient(90deg, transparent, rgb(17 17 15 / 60%)); content: ""; inset: 0; position: absolute; }
   .feature-art img { height: 100%; object-fit: cover; width: 100%; }
-  .feature-art__mark { background: var(--signal); bottom: 0; color: #23120e; font-family: "DM Serif Display", Georgia, serif; font-size: 4rem; line-height: 1; padding: 0.5rem 1.1rem 0.8rem; position: absolute; right: 0; z-index: 2; }
-  .feature-copy { align-self: center; padding: clamp(3rem, 8vw, 7.5rem) clamp(2rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem); position: relative; }
-  .feature-copy::before { color: var(--signal); content: "04 / THE READING ROOM"; font-size: 0.61rem; font-weight: 800; left: clamp(2rem, 5vw, 5rem); letter-spacing: 0.15em; position: absolute; top: clamp(1.2rem, 3vw, 2.7rem); }
-  .feature-copy h2 { font-size: clamp(2.4rem, 4vw, 4.6rem); line-height: 0.92; margin: 0.9rem 0 1.5rem; }
-  .feature-copy > p:not(.section-heading__eyebrow) { color: #beb5aa; font-size: 0.88rem; line-height: 1.75; }
+  .feature-art__mark { align-items: center; background: var(--signal); bottom: 0; color: #23120e; display: flex; justify-content: center; padding: 0.8rem 1rem; position: absolute; right: 0; z-index: 2; }
+  .feature-art__badge { align-items: center; background: rgb(27 17 14 / 85%); border: 1px solid var(--rule); bottom: 1rem; color: #ded5c9; display: flex; gap: 0.6rem; left: 1rem; padding: 0.35rem 0.75rem; position: absolute; z-index: 2; }
+  .feature-art__badge span { color: var(--signal); font-family: "DM Serif Display", Georgia, serif; font-size: 1rem; }
+  .feature-art__badge b { font-size: 0.52rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .feature-copy { align-self: center; padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 3.5vw, 3.5rem); position: relative; }
+  .feature-copy--semantic::before { color: var(--signal); content: "08 / VECTOR DISCOVERY"; font-size: 0.61rem; font-weight: 800; left: clamp(1.5rem, 3.5vw, 3.5rem); letter-spacing: 0.15em; position: absolute; top: clamp(1rem, 2.5vw, 2rem); }
+  .feature-copy h2 { font-size: clamp(2.2rem, 3.8vw, 4.2rem); line-height: 0.92; margin: 0.9rem 0 1.2rem; }
+  .feature-copy > p:not(.section-heading__eyebrow) { color: #beb5aa; font-size: 0.86rem; line-height: 1.7; }
   .text-button { align-items: center; background: transparent; border: 0; border-bottom: 1px solid var(--signal); color: var(--paper); display: inline-flex; font-size: 0.67rem; font-weight: 800; gap: 0.5rem; letter-spacing: 0.1em; margin-top: 1.8rem; padding: 0 0 0.5rem; text-transform: uppercase; }
+
+  .semantic-prompt-box { margin-top: 1.4rem; }
+  .semantic-prompt-input-wrapper { align-items: center; background: #1c1a17; border: 1px solid var(--rule); display: flex; gap: 0.75rem; padding: 0.4rem 0.4rem 0.4rem 0.9rem; transition: border-color 200ms ease; }
+  .semantic-prompt-input-wrapper:focus-within { border-color: var(--signal); }
+  .semantic-prompt-icon { color: var(--signal); flex-shrink: 0; }
+  .semantic-prompt-input { background: transparent; border: 0; color: var(--paper); font-family: "Manrope", sans-serif; font-size: 0.82rem; outline: none; width: 100%; }
+  .semantic-prompt-input::placeholder { color: #887f74; }
+  .semantic-prompt-btn { border-radius: 0; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; padding: 0.55rem 0.9rem; text-transform: uppercase; white-space: nowrap; }
+
+  .semantic-presets { margin-top: 1.1rem; }
+  .semantic-presets > span { color: #887f74; display: block; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+  .semantic-presets__pills { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.55rem; }
+  .semantic-preset-pill { background: #201e1a; border: 1px solid rgb(241 238 231 / 14%); color: #ded5c9; cursor: pointer; font-size: 0.62rem; font-weight: 700; padding: 0.3rem 0.65rem; transition: all 160ms ease; }
+  .semantic-preset-pill:hover, .semantic-preset-pill.is-active { background: var(--signal); border-color: var(--signal); color: #1b110e; }
+
+  .semantic-results { background: #151411; border: 1px solid var(--rule); margin-top: 1.5rem; padding: 0.9rem; }
+  .semantic-results__header { align-items: center; color: var(--signal); display: flex; font-size: 0.65rem; font-weight: 800; gap: 0.45rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .semantic-results__header b { color: var(--paper); }
+  .semantic-results__grid { display: grid; gap: 0.65rem; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0.8rem; }
+  .semantic-result-card { color: var(--paper); display: block; text-decoration: none; }
+  .semantic-result-card__art { aspect-ratio: 0.72; background: #211f1b; border: 1px solid rgb(241 238 231 / 18%); overflow: hidden; position: relative; }
+  .semantic-result-card__art img { height: 100%; object-fit: cover; transition: transform 220ms ease; width: 100%; }
+  .semantic-result-card:hover img { transform: scale(1.05); }
+  .semantic-match-score { background: var(--signal); bottom: 0.4rem; color: #1b110e; font-size: 0.48rem; font-weight: 800; letter-spacing: 0.08em; padding: 0.15rem 0.4rem; position: absolute; right: 0.4rem; text-transform: uppercase; }
+  .semantic-result-card__info h4 { font-family: "DM Serif Display", Georgia, serif; font-size: 0.85rem; font-weight: 400; line-height: 1.1; margin-top: 0.45rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .semantic-result-card:hover h4 { color: var(--signal); }
+  .semantic-result-card__info p { color: #9f968b; font-size: 0.52rem; font-weight: 800; letter-spacing: 0.06em; margin-top: 0.2rem; text-transform: uppercase; }
+
   .genre-index { border-left: 1px solid var(--rule); padding: clamp(1.4rem, 3vw, 3rem) 0 clamp(1.4rem, 3vw, 3rem) clamp(1.2rem, 2.4vw, 2.5rem); }
   .genre-index > p { color: var(--signal); font-size: 0.63rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .genre-index > div { margin-top: 1.5rem; }
@@ -664,18 +696,33 @@
 @layer components {
   /* Midnight Editorial reminder: these collection rails act as numbered archive entries, with poster art as the primary color source. */
   .discovery-collections { border-top: 1px solid var(--rule); margin-top: clamp(5rem, 10vw, 10rem); padding: 0 clamp(1rem, 6vw, 8rem); }
-  .discovery-collections__masthead { border-bottom: 1px solid var(--rule); display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr) minmax(220px, 0.44fr); padding: clamp(4rem, 8vw, 7rem) clamp(0rem, 10vw, 10rem) clamp(3rem, 6vw, 5rem); position: relative; }
+  .discovery-collections__masthead { align-items: center; border-bottom: 1px solid var(--rule); display: grid; gap: clamp(2rem, 5vw, 5rem); grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); padding: clamp(3.5rem, 6vw, 5.5rem) 0; position: relative; }
   .discovery-collections__masthead::before { color: var(--signal); content: "04—07 / THE WIDER INDEX"; font-size: 0.59rem; font-weight: 800; left: 0; letter-spacing: 0.14em; position: absolute; top: 1.25rem; }
-  .discovery-collections__masthead h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(3rem, 5.6vw, 5.8rem); font-weight: 400; letter-spacing: -0.06em; line-height: 0.88; margin: 0.85rem 0 0; }
-  .discovery-collections__masthead h2 em { color: #e9dfd4; font-style: italic; }
-  .discovery-collections__masthead > p:not(.section-heading__eyebrow) { align-self: end; color: #bdb4a8; font-size: 0.88rem; line-height: 1.7; max-width: 300px; }
+  
+  .masthead-art { aspect-ratio: 1.2; border: 1px solid rgb(241 238 231 / 20%); margin-top: 1.5rem; overflow: hidden; position: relative; }
+  .masthead-art img { height: 100%; object-fit: cover; transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1); width: 100%; }
+  .masthead-art:hover img { transform: scale(1.04); }
+  .masthead-art__veil { background: linear-gradient(0deg, rgb(17 16 13 / 80%), transparent 50%); inset: 0; position: absolute; }
+  .masthead-art__badge { align-items: center; background: rgb(241 67 55 / 90%); bottom: 1rem; color: #1b110e; display: flex; gap: 0.6rem; left: 1rem; padding: 0.35rem 0.75rem; position: absolute; }
+  .masthead-art__badge span { font-family: "DM Serif Display", Georgia, serif; font-size: 1rem; letter-spacing: -0.05em; }
+  .masthead-art__badge b { font-size: 0.52rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .masthead-copy h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2.5rem, 4.5vw, 4.8rem); font-weight: 400; letter-spacing: -0.06em; line-height: 0.92; margin: 0.75rem 0 1rem; }
+  .masthead-copy h2 em { color: #e9dfd4; font-style: italic; }
+  .masthead-copy > p:not(.section-heading__eyebrow) { color: #bdb4a8; font-size: 0.88rem; line-height: 1.7; max-width: 440px; }
+  .masthead-quick-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.8rem; }
+  .masthead-quick-links a { align-items: center; background: #201e1a; border: 1px solid var(--rule); color: #ded5c9; display: inline-flex; font-size: 0.65rem; font-weight: 700; gap: 0.5rem; letter-spacing: 0.08em; padding: 0.45rem 0.85rem; text-decoration: none; text-transform: uppercase; transition: all 180ms ease; }
+  .masthead-quick-links a span { color: var(--signal); font-family: "DM Serif Display", Georgia, serif; font-size: 0.85rem; }
+  .masthead-quick-links a:hover { background: var(--signal); border-color: var(--signal); color: #1b110e; }
+  .masthead-quick-links a:hover span { color: #1b110e; }
   .discovery-rail { display: grid; gap: clamp(1.5rem, 4vw, 5rem); grid-template-columns: clamp(92px, 12vw, 200px) minmax(0, 1fr); padding: clamp(3.8rem, 7vw, 6.5rem) 0; }
   .discovery-rail + .discovery-rail { border-top: 1px solid var(--rule); }
   .discovery-rail__index { border-top: 1px solid var(--rule); color: #b7afa4; padding-top: 0.8rem; }
   .discovery-rail__index > span { color: var(--signal); font-family: "DM Serif Display", Georgia, serif; font-size: 2.35rem; letter-spacing: -0.08em; }
   .discovery-rail__index p { font-size: 0.59rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.45; margin-top: 0.75rem; text-transform: uppercase; white-space: pre-line; }
   .discovery-rail__body { min-width: 0; }
-  .discovery-rail__heading { align-items: end; display: flex; gap: 1rem; justify-content: space-between; }
+  .discovery-rail__heading { align-items: flex-start; display: flex; gap: 1rem; justify-content: space-between; }
+  .discovery-rail__heading .text-button { margin-top: 0; }
   .discovery-rail__heading h2 { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(2rem, 3.8vw, 3.8rem); font-weight: 400; letter-spacing: -0.055em; line-height: 0.92; margin-top: 0.6rem; }
   .discovery-rail__cards { display: grid; gap: clamp(0.7rem, 1.3vw, 1.15rem); grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 2.25rem; }
   .discovery-card { color: var(--paper); display: block; min-width: 0; text-decoration: none; }
@@ -704,13 +751,9 @@
   .discovery-rail:nth-child(4) .discovery-card:first-child { grid-column: span 2; }
   .discovery-rail:nth-child(5) .discovery-card:nth-child(3) { border-left: 1px solid var(--rule); padding-left: 0.55rem; }
   .discovery-rail--seasonal .discovery-rail__body { border-left: 2px solid var(--signal); padding-left: clamp(0.8rem, 2vw, 1.8rem); }
-  .discovery-rail--seasonal .discovery-rail__heading::after { color: var(--signal); content: "LIVE DISPATCH"; font-size: 0.5rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .discovery-rail--upcoming .discovery-rail__cards { border-top: 1px solid #625b52; padding-top: 1.15rem; }
-  .discovery-rail--upcoming .discovery-rail__heading::after { color: #c6bdb2; content: "HORIZON BOARD"; font-size: 0.5rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .discovery-rail--popular .discovery-rail__body { border-bottom: 1px solid #625b52; padding-bottom: 1.15rem; }
-  .discovery-rail--popular .discovery-rail__heading::after { color: #9f968b; content: "CULTURAL LEDGER"; font-size: 0.5rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .discovery-rail--top .discovery-rail__body { background: #171613; padding: clamp(1rem, 2vw, 1.8rem); }
-  .discovery-rail--top .discovery-rail__heading::after { color: var(--signal); content: "CANONICAL DOSSIER"; font-size: 0.5rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .discovery-card:hover .discovery-card__art img, .discovery-card:focus-visible .discovery-card__art img { transform: scale(1.06); }
   .discovery-card:hover h3, .discovery-card:focus-visible h3 { color: var(--signal); }
   .discovery-card--skeleton { pointer-events: none; }
@@ -839,4 +882,23 @@
     .collection-message { align-items: flex-start; flex-wrap: wrap; }
     .collection-message .button { margin-left: 0; }
   }
+
+  /* Vector Maintenance Page Styles */
+  .vector-maintenance-page { min-height: 100vh; display: flex; flex-direction: column; }
+  .maintenance-main { flex: 1; display: flex; align-items: center; justify-content: center; padding: clamp(2rem, 5vw, 6rem) 1.5rem; }
+  .maintenance-card { background: #171512; border: 1px solid var(--rule); max-width: 680px; width: 100%; padding: clamp(2rem, 5vw, 4rem); text-align: center; position: relative; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
+  .maintenance-card__badge { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--signal); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; background: rgb(241 80 37 / 10%); border: 1px solid rgb(241 80 37 / 25%); padding: 0.35rem 0.85rem; margin-bottom: 2rem; }
+  .maintenance-card__icon-wrapper { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 88px; height: 88px; border-radius: 50%; background: #201d19; border: 1px solid var(--rule); margin-bottom: 1.8rem; }
+  .maintenance-card__icon { color: var(--signal); position: relative; z-index: 2; }
+  .maintenance-card__pulse { position: absolute; inset: -6px; border-radius: 50%; border: 1px solid var(--signal); opacity: 0.35; animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+  .maintenance-card__title { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.1; margin-bottom: 1.2rem; color: var(--paper); }
+  .maintenance-card__title em { color: var(--signal); font-style: italic; }
+  .maintenance-card__description { color: #beb5aa; font-size: 0.9rem; line-height: 1.7; margin-bottom: 2.2rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .maintenance-status-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.85rem; margin-bottom: 2.5rem; text-align: left; }
+  .status-item { background: #131210; border: 1px solid var(--rule); padding: 0.85rem 0.95rem; }
+  .status-item__label { display: block; font-size: 0.55rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #887f74; margin-bottom: 0.4rem; }
+  .status-item__value { display: flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; font-weight: 700; color: #ded5c9; }
+  .status-item__value--amber { color: #eab308; }
+  .status-item__value--green { color: #22c55e; }
+  .maintenance-card__actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 }

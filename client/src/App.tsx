@@ -14,6 +14,7 @@ import MangaFavoritesPage from "./pages/MangaFavorites";
 import MangaDexReaderPage from "./pages/MangaDexReader";
 import LibraryPage from "./pages/Library";
 import WatchlistPage from "./pages/Watchlist";
+import VectorEnginePage from "./pages/VectorEngine";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -28,6 +29,8 @@ function Router() {
       <Route path={"/manga"} component={MangaArchivePage} />
       <Route path={"/library"} component={LibraryPage} />
       <Route path={"/watchlist"} component={WatchlistPage} />
+      <Route path={"/recommendations"} component={VectorEnginePage} />
+      <Route path={"/vector-engine"} component={VectorEnginePage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
