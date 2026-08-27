@@ -102,6 +102,7 @@ export default function MangaDexReaderPage() {
     saveMangaDexLastReadChapter(selectedMangaId, selectedChapterId, {
       title: title.data.title,
       chapterLabel: chapterLabel(selectedChapter),
+      coverUrl: title.data.coverUrl || undefined,
     });
   }, [selectedChapter, selectedChapterId, selectedMangaId, title.data]);
 

@@ -7,6 +7,7 @@ export type StorageLike = Pick<Storage, "getItem" | "setItem">;
 export type MangaDexReadingProgressDetails = {
   title?: string;
   chapterLabel?: string;
+  coverUrl?: string;
 };
 
 export type MangaDexReadingProgress = MangaDexReadingProgressDetails & {
@@ -20,6 +21,7 @@ export type MangaDexContinueReadingItem = MangaDexReadingProgress & {
   mangaId: string;
   title: string;
   chapterLabel: string;
+  coverUrl?: string;
 };
 
 function resolveStorage(storage?: StorageLike | null): StorageLike | null {
@@ -40,12 +42,14 @@ function normaliseProgressEntry(value: unknown): MangaDexReadingProgress | null 
 
   const title = typeof record.title === "string" && record.title.trim() ? record.title.trim() : undefined;
   const chapterLabel = typeof record.chapterLabel === "string" && record.chapterLabel.trim() ? record.chapterLabel.trim() : undefined;
+  const coverUrl = typeof record.coverUrl === "string" && record.coverUrl.trim() ? record.coverUrl.trim() : undefined;
 
   return {
     chapterId: record.chapterId,
     savedAt: record.savedAt,
     ...(title ? { title } : {}),
     ...(chapterLabel ? { chapterLabel } : {}),
+    ...(coverUrl ? { coverUrl } : {}),
   };
 }
 
@@ -79,6 +83,7 @@ export function getMangaDexContinueReading(storage?: StorageLike | null): MangaD
         ...progress,
         title: progress.title,
         chapterLabel: progress.chapterLabel,
+        coverUrl: progress.coverUrl,
       }];
     })
     .sort((first, second) => second.savedAt - first.savedAt);
@@ -113,6 +118,7 @@ export function saveMangaDexLastReadChapter(mangaId: string, chapterId: string, 
       savedAt: Date.now(),
       ...(details.title ? { title: details.title.trim() } : {}),
       ...(details.chapterLabel ? { chapterLabel: details.chapterLabel.trim() } : {}),
+      ...(details.coverUrl ? { coverUrl: details.coverUrl.trim() } : {}),
     };
     target.setItem(MANGADEX_READING_PROGRESS_STORAGE_KEY, JSON.stringify(progress));
     if (typeof window !== "undefined") window.dispatchEvent(new Event(MANGADEX_READING_PROGRESS_CHANGE_EVENT));

@@ -25,6 +25,7 @@ import { type Anime, useTrendingAnime } from "@/hooks/useTrendingAnime";
 import { useMangaFavorites } from "@/hooks/useMangaFavorites";
 import { useMangaDexContinueReading } from "@/hooks/useMangaDexContinueReading";
 import { useWatchlist } from "@/hooks/useWatchlist";
+import { trpc } from "@/lib/trpc";
 
 const HERO_ART = "/anima-midnight-hero_8078e0a3.jpg";
 const PAPER_TEXTURE = "/anima-paper-texture_044607fc.jpg";
@@ -129,10 +130,13 @@ function ContinueWatchingCard({ item, index }: { item: ReturnType<typeof useWatc
 }
 
 function ContinueReadingCard({ item, index }: { item: ReturnType<typeof useMangaDexContinueReading>["items"][number]; index: number }) {
+  const mangaTitleQuery = trpc.mangaDex.title.useQuery({ id: item.mangaId }, { enabled: !item.coverUrl, staleTime: 300_000, retry: false });
+  const coverImage = item.coverUrl || mangaTitleQuery.data?.coverUrl;
+
   return (
     <Link className="continue-card continue-card--manga" href={`/reader?title=${encodeURIComponent(item.mangaId)}`} aria-label={`Continue reading ${item.title} at ${item.chapterLabel}`}>
       <div className="continue-card__art">
-        <div className="continue-card__fallback" />
+        {coverImage ? <img src={coverImage} alt="" loading="lazy" referrerPolicy="no-referrer" /> : <div className="continue-card__fallback" />}
         <div className="continue-card__veil" />
         <span className="continue-card__rank">{String(index + 1).padStart(2, "0")}</span>
         <span className="continue-card__play"><Play size={17} fill="currentColor" /></span>
