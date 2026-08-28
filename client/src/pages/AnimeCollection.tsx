@@ -38,8 +38,8 @@ const INTERLUDES: Record<CollectionKey, { label: string; title: string; note: st
 function ArchiveInterlude({ collection, nextRank }: { collection: CollectionKey; nextRank: number }) { const entry = INTERLUDES[collection]; return <aside className={`collection-interlude collection-interlude--${collection}`}><span>{entry.label}</span><b>{String(nextRank).padStart(2, "0")}</b><div><h3>{entry.title}</h3><p>{entry.note}</p></div></aside>; }
 
 export default function AnimeCollectionPage() {
-  const [, params] = useRoute("/collection/:collection");
-  const collection = params?.collection as CollectionKey;
+  const [, params] = useRoute("/collection/:collection?");
+  const collection = (params?.collection || "seasonal") as CollectionKey;
   const isValid = VALID_COLLECTIONS.has(collection);
   const definition = isValid ? COLLECTIONS[collection] : null;
   const [anime, setAnime] = useState<Anime[]>([]);
